@@ -27,7 +27,7 @@ public abstract class Usuario {
 
     @NotBlank(message = "{NotBlank.user.email}")
     @Size(max = 60)
-    @Column(nullable = false, length = 60)
+    @Column(nullable = false, unique = true, length = 60)
     private String email;
 
     @NotBlank(message = "{NotBlank.user.senha}")
