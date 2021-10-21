@@ -15,22 +15,22 @@ import javax.validation.constraints.Size;
 @Table(name = "cliente")
 public class Cliente extends Usuario {
 
-    @NotBlank
-    @Size(min = 14, max = 14, message = "Tem que ter 14 números")
+    @NotBlank(message = "{NotBlank.cliente.cpf}")
+    @Size(min = 14, max = 14, message = "{Size.cliente.cpf}")
     @Column(name = "cpf", nullable = false, length = 14)
     private String cpf;
 
-    @NotBlank
-    @Size(min = 11, max = 11, message = "Tem que ter 11 números, ddd + celular")
+    @NotBlank(message = "{NotBlank.cliente.telefone}")
+    @Size(min = 11, max = 11, message = "{Size.cliente.telefone}")
     @Column(name = "telefone", nullable = false, length = 11)
     private String telefone;
 
-    @NotBlank
+    @NotBlank(message = "{NotBlank.cliente.sexo}")
     @Size(min = 11, max = 11)
     @Column(name = "sexo", nullable = false)
     private String sexo;
 
-    @NotBlank
+    @NotBlank(message = "{NotBlank.cliente.dataNacminto}")
     @Size(min = 10, max = 10)
     @Column(name = "data_nascimento", nullable = false)
     private Date dataNascimento;

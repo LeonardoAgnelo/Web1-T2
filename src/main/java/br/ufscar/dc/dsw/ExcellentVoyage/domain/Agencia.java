@@ -10,13 +10,13 @@ import javax.validation.constraints.Size;
 @Table(name = "agencia")
 public class Agencia extends Usuario {
 
-    @NotBlank
-    @Size(min = 18, max = 18, message = "Tem que ter 18 números")
+    @NotBlank(message = "{NotBlank.agnecia.cnpj}")
+    @Size(min = 18, max = 18, message = "{Size.agencia.cnpj}")
     @Column(name = "cnpj", nullable = false, length = 18)
     private String cnpj;
 
-    @NotBlank
-    @Size(min = 18, max = 120, message = "Tem que ter no minimo 18 caracteres")
+    @NotBlank(message = "{NotBlank.agnecia.descricao}")
+    @Size(min = 18, max = 120, message = "{Size.agencia.descricao}")
     @Column(name = "descricao", nullable = false, length = 120)
     private String descricao;
 
