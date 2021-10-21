@@ -22,22 +22,22 @@ public abstract class Usuario {
 
     @NotBlank(message = "{NotBlank.user.nome}")
     @Size(max = 60)
-    @Column(nullable = false, length = 60)
+    @Column(name = "nome", nullable = false, length = 60)
     private String nome;
 
     @NotBlank(message = "{NotBlank.user.email}")
     @Size(max = 60)
-    @Column(nullable = false, unique = true, length = 60)
+    @Column(name = "email", nullable = false, unique = true, length = 60)
     private String email;
 
     @NotBlank(message = "{NotBlank.user.senha}")
     @Size(min = 4, max = 60)
-    @Column(nullable = false, length = 60)
+    @Column(name = "senha", nullable = false, length = 60)
     private String senha;
 
     @NotBlank(message = "{NotBlank.user.tipo}")
     @Size(max = 60)
-    @Column(nullable = false, length = 60)
+    @Column(name= "tipo", nullable = false, length = 60)
     private String tipo;
 
     public Long getId() {
