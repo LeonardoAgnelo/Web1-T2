@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "pessoa")
+@Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Usuario {
 
@@ -39,26 +39,6 @@ public abstract class Usuario {
     @Size(max = 60)
     @Column(nullable = false, length = 60)
     private String tipo;
-
-    public Usuario(Long id){
-        this.setId(id);
-    }
-
-    public Usuario(Long id, String nome, String email, String senha, String tipo) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.tipo = tipo;
-    }
-
-    public Usuario(String nome, String email, String senha, String tipo) {
-        super();
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.tipo = tipo;
-    }
 
     public Long getId() {
         return id;
