@@ -1,4 +1,4 @@
-package br.ufscar.dc.dsw.domain;
+package br.ufscar.dc.dsw.ExcellentVoyage.domain;
 
 import java.sql.Date;
 
@@ -59,11 +59,11 @@ public class Cliente extends Usuario {
         this.sexo = sexo;
     }
 
-    public Timestamp getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Timestamp dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 }
