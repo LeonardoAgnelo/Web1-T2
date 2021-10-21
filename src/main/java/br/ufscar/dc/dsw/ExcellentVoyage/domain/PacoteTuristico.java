@@ -2,6 +2,7 @@ package br.ufscar.dc.dsw.ExcellentVoyage.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,34 +11,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 @Entity
-@Table(name = "pacote_turistico")
+@Table(name = "PacoteTuristico")
 public class PacoteTuristico {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "cnpj_agencia")
+    @JoinColumn(name = "cnpjAgencia")
     private Agencia agencia;
 
-    @Column(name = "destino_cidade", nullable = false, length = 60)
+    @Column(nullable = false, length = 60)
     private String destinoCidade;
 
-    @Column(name = "destino_estado", nullable = false, length = 60)
+    @Column(nullable = false, length = 60)
     private String destinoEstado;
 
-    @Column(name = "destino_pais", nullable = false, length = 60)
+    @Column(nullable = false, length = 60)
     private String destinoPais;
 
-    @Column(name = "data_partida", nullable = false)
+    @Column(nullable = false)
     private Date dataPartida;
 
-    @Column(name = "duracao_dias", nullable = false)
+    @Column(nullable = false)
     private Integer duracaoDias;
 
     @NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
@@ -47,8 +49,11 @@ public class PacoteTuristico {
     @Column(nullable = false)
     private String descricao;
 
-    @Column(name = "qtd_foto", nullable = false)
+    @Column(nullable = false)
     private Integer qtdFoto;
+
+	@OneToMany(mappedBy = "pacoteTuristico")
+	private List<Foto> fotos;
 
 	public void setId (Long id) {
 		this.id = id;

@@ -4,15 +4,12 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "cliente")
+@Table(name = "Cliente")
 public class Cliente extends Usuario {
 
     @NotBlank(message = "{NotBlank.cliente.cpf}")
@@ -32,7 +29,7 @@ public class Cliente extends Usuario {
 
     @NotBlank(message = "{NotBlank.cliente.dataNacminto}")
     @Size(min = 10, max = 10)
-    @Column(name = "data_nascimento", nullable = false)
+    @Column(name = "dataNascimento", nullable = false)
     private Date dataNascimento;
 
     public String getCpf() {

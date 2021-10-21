@@ -12,12 +12,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "Usuario")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Usuario {
 
     @Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
     @NotBlank(message = "{NotBlank.user.nome}")

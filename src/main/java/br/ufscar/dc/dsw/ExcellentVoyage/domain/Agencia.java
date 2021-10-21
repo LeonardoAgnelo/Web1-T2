@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "agencia")
+@Table(name = "Agencia")
 public class Agencia extends Usuario {
 
     @NotBlank(message = "{NotBlank.agnecia.cnpj}")

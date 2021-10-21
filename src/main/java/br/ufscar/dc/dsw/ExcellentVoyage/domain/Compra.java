@@ -12,23 +12,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "compra")
+@Table(name = "Compra")
 public class Compra {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente")
+    @JoinColumn(name = "idCliente")
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "id_pacote")
+    @JoinColumn(name = "idPacote")
     private PacoteTuristico pacoteTuristico;
 
-    @Column(name = "data_reuniao", nullable = false)
+    @Column(name = "dataReuniao", nullable = false)
     private Date dataReuniao;
 
-    @Column(name = "link_reuniao", nullable = false)
+    @Column(name = "linkReuniao", nullable = false)
     private String linkReuniao;
 
     public Long getId() {

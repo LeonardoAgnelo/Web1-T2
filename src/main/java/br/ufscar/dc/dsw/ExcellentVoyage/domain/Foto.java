@@ -2,30 +2,44 @@ package br.ufscar.dc.dsw.ExcellentVoyage.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "foto")
+@Table(name = "Foto")
 public class Foto {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @ManyToOne
-    @JoinColumn(name = "id")
-    private Long idPacote;
+    @JoinColumn(name = "idPacote")
+    private PacoteTuristico pacoteTuristico;
 
     @Column(nullable = false)
     private String url;
 
-    public Long getIdPacote() {
-        return idPacote;
+    public Long getId() {
+        return this.id;
     }
 
-    public void setIdPacote(Long idPacote) {
-        this.idPacote = idPacote;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public PacoteTuristico getIdPacoteTuristico() {
+        return this.pacoteTuristico;
+    }
+
+    public void setPacoteTuristico(PacoteTuristico pacoteTuristico) {
+        this.pacoteTuristico = pacoteTuristico;
     }
 
     public String getUrl() {
-        return url;
+        return this.url;
     }
 
     public void setUrl(String url) {

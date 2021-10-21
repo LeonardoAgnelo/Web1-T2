@@ -8,6 +8,6 @@ import br.ufscar.dc.dsw.ExcellentVoyage.domain.Usuario;
 @SuppressWarnings("unchecked")
 public interface IUsuarioDAO extends CrudRepository<Usuario, Long> {
 
-    public Usuario findByEmail();
+    public Usuario findByEmail(String email);
     
 }
