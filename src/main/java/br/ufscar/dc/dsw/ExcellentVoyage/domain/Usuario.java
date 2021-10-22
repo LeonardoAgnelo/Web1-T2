@@ -1,5 +1,7 @@
 package br.ufscar.dc.dsw.ExcellentVoyage.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,12 +15,12 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Usuario")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Usuario {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Usuario implements Serializable {
 
     @Id 
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    private Long id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
 
     @NotBlank(message = "{NotBlank.user.nome}")
     @Size(max = 60)
@@ -41,12 +43,12 @@ public abstract class Usuario {
     private String tipo;
 
     public Long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
     public String getNome() {
         return nome;

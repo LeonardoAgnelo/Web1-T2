@@ -2,12 +2,14 @@ package br.ufscar.dc.dsw.ExcellentVoyage.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Agencia")
+@PrimaryKeyJoinColumn(name="idUsuario")
 public class Agencia extends Usuario {
 
     @NotBlank(message = "{NotBlank.agnecia.cnpj}")
