@@ -1,6 +1,6 @@
 <nav class="navbar-container">
     <!-- <fmt:bundle basename="message"> -->
-        <a href="index.jsp"><img class="logo" th:src="@{/image/logo.svg}" /></a>
+        <a href="index.html"><img class="logo" th:src="@{/image/logo.svg}" /></a>
     
         <!-- <c:choose>
             <c:when test="${sessionScope.usuarioLogado != null}">
@@ -15,7 +15,7 @@
             </c:when>
             <c:otherwise> -->
                 <div class="right-side">
-                    <a href="/login" class="botao-login" th:text="#{nav.login}">
+                    <a th:href="@{/login}" class="botao-login" th:text="#{nav.login}">
                     </a>
                     <a href="/cadastro" class="botao-cadastro" th:text="#{nav.cadastro}">
                     </a>
