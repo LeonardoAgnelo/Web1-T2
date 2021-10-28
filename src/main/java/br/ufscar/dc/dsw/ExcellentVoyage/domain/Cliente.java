@@ -1,13 +1,17 @@
 package br.ufscar.dc.dsw.ExcellentVoyage.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "Cliente")
@@ -25,12 +29,12 @@ public class Cliente extends Usuario {
     private String telefone;
 
     @NotBlank(message = "{NotBlank.cliente.sexo}")
-    @Size(min = 11, max = 11)
     @Column(name = "sexo", nullable = false)
     private String sexo;
 
-    @NotBlank(message = "{NotBlank.cliente.dataNacminto}")
-    @Size(min = 10, max = 10)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Past()
+    @NotNull(message = "{NotBlank.cliente.dataNacminto}")
     @Column(name = "dataNascimento", nullable = false)
     private Date dataNascimento;
 

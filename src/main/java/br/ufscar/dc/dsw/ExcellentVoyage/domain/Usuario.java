@@ -37,7 +37,6 @@ public class Usuario implements Serializable {
     @Column(name = "senha", nullable = false, length = 60)
     private String senha;
 
-    @NotBlank(message = "{NotBlank.user.tipo}")
     @Size(max = 60)
     @Column(name= "tipo", nullable = false, length = 60)
     private String tipo;
