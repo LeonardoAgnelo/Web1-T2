@@ -19,12 +19,16 @@ public class ExcellentVoyageApplication {
 	public CommandLineRunner demo(IUsuarioDAO usuarioDAO) {
 		return (args) -> {
 			
-			Usuario admin = new Usuario();
+			Usuario admin = usuarioDAO.findByEmail("admin@email.com");
+			
+			if(admin == null){
+			admin = new Usuario();
 			admin.setNome("admin");
 			admin.setSenha("admin");
 			admin.setEmail("admin@email.com");
 			admin.setTipo("admin");
 			usuarioDAO.save(admin);
+			}
 		};
 	}
 }

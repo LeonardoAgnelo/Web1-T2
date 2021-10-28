@@ -22,7 +22,8 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/cadastro").setViewName("cadastro");
         registry.addViewController("/cadastro/agencia").setViewName("cadastroAgencia");
         registry.addViewController("/cadastro/cliente").setViewName("cadastroCliente");
-    }
+		registry.addViewController("/login").setViewName("login");
+	}
 
     @Bean
     public LocaleResolver localeResolver() {

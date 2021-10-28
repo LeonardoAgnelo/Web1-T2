@@ -6,6 +6,7 @@
     <title th:text="#{cadastro.title}"> | Excellent Voyage</title>
     <link rel="stylesheet" th:href="@{/styles/global.css}" />
     <link rel="stylesheet" th:href="@{/styles/cadastro-agencia.css}" />
+<<<<<<< HEAD
 </head>
 <body>
     <div class="cadastro-cliente-container box">
@@ -19,11 +20,20 @@
                 </ul>
             </div>
         </c:if> -->
+=======
+    <!-- script para verificar se ja tem usuario logado-->
+</head>
+<body>
+    <div class="cadastro-cliente-container box">
+        <a class="botao-voltar" href="javascript:history.go(-1)" th:text="#{cadastro.voltar}"><img th:src="@{image/icons/arrow-left.svg}" /></a>
+        <!--erros-->
+>>>>>>> cffd5fe15c537a7b306413c77b99291afa16ec2f
         <form class="form-cadastro-cliente" action="cadastroAgencia" method="POST" >
             <h1 th:text="#{cadastro.title}"></h1>
             <div class="campos">
                 <div class="campo-container">
                     <label for="nome" th:text="#{cadastro.nome}"></label>
+<<<<<<< HEAD
                     <input class="campo" id="nome" name="nome" type="text"/>
                 </div>
                 <div class="campo-container">
@@ -33,6 +43,17 @@
                 <div class="campo-container">
                     <label for="cnpj" th:text="#{cadastro.cnpj}"></label>
                     <input class="campo" id="cnpj" name="cnpj" type="text"/>
+=======
+                    <input class="campo" id="nome" name="nome" type="text" value=""/>
+                </div>
+                <div class="campo-container">
+                    <label for="email" th:text="#{cadastro.email}"></label>
+                    <input class="campo" id="email" name="email" type="email" value=""/>
+                </div>
+                <div class="campo-container">
+                    <label for="cnpj" th:text="#{cadastro.cnpj}"></label>
+                    <input class="campo" id="cnpj" name="cnpj" type="text" value=""/>
+>>>>>>> cffd5fe15c537a7b306413c77b99291afa16ec2f
                 </div>
                 <div class="campo-container">
                     <label for="senha" th:text="#{cadastro.senha}"></label>
@@ -40,7 +61,11 @@
                 </div>
                 <div class="campo-container">
                     <label for="descricao" th:text="#{cadastro.descricao}"></label>
+<<<<<<< HEAD
                     <textarea class="campo" id="descricao" name="descricao" type="text">${descricao}</textarea>
+=======
+                    <textarea class="campo" id="descricao" name="descricao" type="text"></textarea>
+>>>>>>> cffd5fe15c537a7b306413c77b99291afa16ec2f
                 </div>
                 <div class="campo-container">
                     <label for="confirmar-senha" th:text="#{cadastro.confirmaSenha}"></label>
@@ -50,5 +75,10 @@
             <input class="submit" type="submit" name="bOK" th:value="#{cadastro.cadastrar}" />
         </form>
     </div>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> cffd5fe15c537a7b306413c77b99291afa16ec2f
 </body>
 </html>
