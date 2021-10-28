@@ -14,13 +14,27 @@ public class CadastroController {
     }
 
     @GetMapping("/agencia")
-    public String cadastroAgencia(){
+    public String formsAgencia(){
         return "cadastroAgencia";
     }
 
     @GetMapping("/cliente")
-    public String cadastroCliente(){
+    public String formsCliente(){
         return "cadastroCliente";
+    }
+
+    @GetMapping("/cadastroAgencia")
+    public String cadastrarAgencia(){
+        //implementar cadastro de agencia
+
+        return "index";
+    }
+
+    @GetMapping("/cadastroCliente")
+    public String cadastrarCliente(){
+        //implementar cadastro de cliente
+        
+        return "index";
     }
 
 }
