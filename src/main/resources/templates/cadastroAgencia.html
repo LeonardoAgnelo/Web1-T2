@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{cadastro.title}"> | Excellent Voyage</title>
+    <link rel="stylesheet" th:href="@{/styles/global.css}" />
+    <link rel="stylesheet" th:href="@{/styles/cadastro-agencia.css}" />
+    <!-- script para verificar se ja tem usuario logado-->
+</head>
+<body>
+    <div class="cadastro-cliente-container box">
+        <a class="botao-voltar" href="javascript:history.go(-1)" th:text="#{cadastro.voltar}"><img th:src="@{image/icons/arrow-left.svg}" /></a>
+        <!--erros-->
+        <form class="form-cadastro-cliente" action="cadastroAgencia" method="POST" >
+            <h1 th:text="#{cadastro.title}"></h1>
+            <div class="campos">
+                <div class="campo-container">
+                    <label for="nome" th:text="#{cadastro.nome}"></label>
+                    <input class="campo" id="nome" name="nome" type="text" value=""/>
+                </div>
+                <div class="campo-container">
+                    <label for="email" th:text="#{cadastro.email}"></label>
+                    <input class="campo" id="email" name="email" type="email" value=""/>
+                </div>
+                <div class="campo-container">
+                    <label for="cnpj" th:text="#{cadastro.cnpj}"></label>
+                    <input class="campo" id="cnpj" name="cnpj" type="text" value=""/>
+                </div>
+                <div class="campo-container">
+                    <label for="senha" th:text="#{cadastro.senha}"></label>
+                    <input class="campo" id="senha" name="senha" type="password"/>
+                </div>
+                <div class="campo-container">
+                    <label for="descricao" th:text="#{cadastro.descricao}"></label>
+                    <textarea class="campo" id="descricao" name="descricao" type="text"></textarea>
+                </div>
+                <div class="campo-container">
+                    <label for="confirmar-senha" th:text="#{cadastro.confirmaSenha}"></label>
+                    <input class="campo" id="confirmar-senha" name="confirmar-senha" type="password"/>
+                </div>
+            </div>
+            <input class="submit" type="submit" name="bOK" th:value="#{cadastro.cadastrar}" />
+        </form>
+    </div>
+
+
+</body>
+</html>
