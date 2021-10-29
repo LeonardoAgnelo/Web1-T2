@@ -21,14 +21,14 @@ public class ExcellentVoyageApplication {
 		return (args) -> {
 			
 			Usuario admin = usuarioDAO.findByEmail("admin@email.com");
-			
+
 			if(admin == null){
-			admin = new Usuario();
-			admin.setNome("admin");
-			admin.setSenha(encoder.encode("admin"));
-			admin.setEmail("admin@email.com");
-			admin.setTipo("ROLE_admin");
-			usuarioDAO.save(admin);
+				admin = new Usuario();
+				admin.setNome("admin");
+				admin.setSenha(encoder.encode("admin"));
+				admin.setEmail("admin@email.com");
+				admin.setTipo("ROLE_admin");
+				usuarioDAO.save(admin);
 			}
 		};
 	}

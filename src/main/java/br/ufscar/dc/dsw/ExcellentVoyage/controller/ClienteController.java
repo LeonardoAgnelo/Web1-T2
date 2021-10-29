@@ -34,6 +34,6 @@ public class ClienteController {
 
         service.salvar(cliente);
 
-        return "cliente/home";
+        return "index";
     }
 }
