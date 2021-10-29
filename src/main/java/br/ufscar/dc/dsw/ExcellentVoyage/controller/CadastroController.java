@@ -23,18 +23,5 @@ public class CadastroController {
         return "cadastroCliente";
     }
 
-    @GetMapping("/cadastroAgencia")
-    public String cadastrarAgencia(){
-        //implementar cadastro de agencia
-
-        return "index";
-    }
-
-    @GetMapping("/cadastroCliente")
-    public String cadastrarCliente(){
-        //implementar cadastro de cliente
-        
-        return "index";
-    }
 
 }
