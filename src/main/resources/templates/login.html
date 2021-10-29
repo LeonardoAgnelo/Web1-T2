@@ -17,11 +17,16 @@
 
         <!-- impplementar erro-->
 
-        <form class="form-login" action="login" method="POST">
+        <form class="form-login" th:action="@{/login}" method="POST">
+            <div th:if="${param.error}">
+				<div class="form-erro">
+					<span th:text="#{login.error}"></span>
+				</div>
+			</div>
             <h1 th:text="#{login.title}"> </h1>
-            <input type="text" name="email" class="campo" th:placeholder="#{login.email}"/>
-            <input type="password" name="senha" class="campo" th:placeholder="#{login.senha}" />
-            <input type="submit" name="bOK" th:value="#{login.botao}"/>
+            <input type="text" id="username" name="username" class="campo" th:placeholder="#{login.email}"/>
+            <input type="password" id="password" name="password" class="campo" th:placeholder="#{login.senha}" />
+            <input type="submit" id ="login-submit" name="login-submit" th:value="#{login.botao}"/>
             <a th:href="@{/cadastro}" th:text="#{cadastro.title}"></a>
         </form>
     </div>

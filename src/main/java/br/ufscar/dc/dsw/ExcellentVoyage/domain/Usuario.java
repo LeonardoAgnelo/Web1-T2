@@ -41,6 +41,9 @@ public class Usuario implements Serializable {
     @Column(name= "tipo", nullable = false, length = 60)
     private String tipo;
 
+    @Column(nullable = false)
+    private boolean enabled;
+
     public Long getId() {
 		return id;
 	}
@@ -80,4 +83,12 @@ public class Usuario implements Serializable {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    public boolean isEnabled() {
+		return enabled;
+	}
+	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

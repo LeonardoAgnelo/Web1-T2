@@ -3,6 +3,7 @@ package br.ufscar.dc.dsw.ExcellentVoyage.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,9 @@ public class AgenciaController {
     @Autowired
     IAgenciaService service;
 
+    @Autowired
+	private BCryptPasswordEncoder encoder;
+
     @PostMapping("/salvar")
     public String salvar(@Valid Agencia agencia, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -26,7 +30,8 @@ public class AgenciaController {
             return "cadastroAgencia";
         }
 
-        agencia.setTipo("agencia");
+        agencia.setSenha(encoder.encode(agencia.getSenha()));
+        agencia.setTipo("ROLE_agencia");
 
         service.salvar(agencia);
 

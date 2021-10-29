@@ -3,6 +3,7 @@ package br.ufscar.dc.dsw.ExcellentVoyage.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,9 @@ import br.ufscar.dc.dsw.ExcellentVoyage.service.spec.IClienteService;
 public class ClienteController {
     @Autowired
     IClienteService service;
+    
+    @Autowired
+	private BCryptPasswordEncoder encoder;
 
     @PostMapping("/salvar")
     public String salvar(@Valid Cliente cliente, BindingResult result, Model model) {
@@ -25,10 +29,11 @@ public class ClienteController {
             return "cadastroCliente";
         }
 
-        cliente.setTipo("cliente");
+        cliente.setSenha(encoder.encode(cliente.getSenha()));
+        cliente.setTipo("ROLE_cliente");
 
         service.salvar(cliente);
 
-        return "index";
+        return "cliente/home";
     }
 }
