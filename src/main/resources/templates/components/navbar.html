@@ -1,32 +1,6 @@
 <nav class="navbar-container">
     <!-- <fmt:bundle basename="message"> -->
-<<<<<<< HEAD
-    <a href="index.jsp"><img class="logo" th:src="@{/image/logo.svg}" /></a>
-
-    <!-- <c:choose>
-        <c:when test="${sessionScope.usuarioLogado != null}">
-            <div class="right-side">
-                <a href="${pageContext.request.contextPath}/perfil" class="botao-logado">
-                    <img src="assets/icons/person-circle.svg"/> ${sessionScope.usuarioLogado.nome}
-                </a>
-                <a href="${pageContext.request.contextPath}/logout" class="botao-logado">
-                    <img src="assets/icons/exit.svg"/> <fmt:message key="nav.sair"/>
-                </a>
-            </div>
-        </c:when>
-        <c:otherwise> -->
-            <div class="right-side">
-                <a href="/login" class="botao-login" th:text="#{nav.login}">
-                </a>
-                <a th:href="@{/cadastro}" class="botao-cadastro" th:text="#{nav.cadastro}">
-                </a>
-            </div>
-        <!-- </c:otherwise>
-    </c:choose> -->
-<!-- </fmt:bundle> -->
-</nav>
-=======
-        <a href="index.html"><img class="logo" th:src="@{/image/logo.svg}" /></a>
+        <a th:href="@{/index}"><img class="logo" th:src="@{/image/logo.svg}" /></a>
     
         <!-- <c:choose>
             <c:when test="${sessionScope.usuarioLogado != null}">
@@ -50,4 +24,3 @@
         </c:choose> -->
     <!-- </fmt:bundle> -->
     </nav>
->>>>>>> cffd5fe15c537a7b306413c77b99291afa16ec2f
