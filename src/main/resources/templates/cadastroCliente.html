@@ -24,7 +24,7 @@
             <div class="campos">
                 <div class="campo-container">
                     <label for="nome" th:text="#{cadastro.nome}"></label>
-                    <input class="campo" id="nome" name="nome" type="text"/>
+                    <input class="campo" id="nome" name="nome" type="text" th:field="*{nome}"/>
 
                     <div class="field-erro">
                         <span th:errors="*{nome}"></span>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="campo-container">
                     <label for="email" th:text="#{cadastro.email}"></label>
-                    <input class="campo" id="email" name="email" type="text"/>
+                    <input class="campo" id="email" name="email" type="text" th:field="*{email}"/>
 
                     <div class="field-erro">
                         <span th:errors="*{email}"></span>
@@ -40,9 +40,8 @@
                 </div>
                 <div class="campo-container">
                     <label for="cpf" th:text="#{cadastro.cpf}"></label>
-                    <input class="campo" id="cpf" name="cpf" type="text"
-                    autofocus="autofocus" placeholder="___.___.___-__"
-                    data-mask="000.000.000-00" data-mask-reverse="true"/>
+                    <input class="campo" id="cpf" name="cpf" type="text" th:field="*{cpf}"/>
+                    <!--implementar mascara de cpf-->
 
                     <div class="field-erro">
                         <span th:errors="*{cpf}"></span>
@@ -50,7 +49,8 @@
                 </div>
                 <div class="campo-container">
                     <label for="telefone" th:text="#{cadastro.telefone}"></label>
-                    <input class="campo" id="telefone" name="telefone" type="text"/>
+                    <input class="campo" id="telefone" name="telefone" type="text" th:field="*{telefone}"/>
+                    <!-- implementar mascara de telefone-->
 
                     <div class="field-erro">
                         <span th:errors="*{telefone}"></span>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="campo-container">
                     <label for="sexo" th:text="#{cadastro.sexo}"></label>
-                    <select class="campo" id="sexo" name="sexo" type="text">
+                    <select class="campo" id="sexo" name="sexo" type="text" th:field="*{sexo}">
                         <option value="" selected hidden th:text="#{cadastro.selecioneSexo}"></option>
                         <!-- <c:choose>
                             <c:when test="${sexo == 'masculino'}">
@@ -82,7 +82,7 @@
                 </div>
                 <div class="campo-container">
                     <label for="data-nascimento" th:text="#{cadastro.nascimento}"></label>
-                    <input class="campo" id="data-nascimento" name="dataNascimento" type="date"/>
+                    <input class="campo" id="data-nascimento" name="dataNascimento" type="date" th:field="*{dataNascimento}"/>
 
                     <div class="field-erro">
                         <span th:errors="*{dataNascimento}"></span>
@@ -99,6 +99,7 @@
                 <div class="campo-container">
                     <label for="confirmar-senha" th:text="#{cadastro.confirmaSenha}"></label>
                     <input class="campo" id="confirmar-senha" name="confirmarSenha" type="password"/>
+                    <!-- precissa implementar erro de confirmar senha-->
 
                 </div>
             </div>
