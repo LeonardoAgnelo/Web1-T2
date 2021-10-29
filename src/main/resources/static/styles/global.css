@@ -112,3 +112,10 @@ a {
 
     box-shadow: var(--shadow);
 }
+.field-erro{
+    margin: 10px;
+
+    font-weight: 500;
+
+    color: #9e001e;
+}
