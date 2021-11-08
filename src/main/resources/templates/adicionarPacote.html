@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{addPacote.title}">| Excellent Voyage</title>
+    <link rel="stylesheet" th:href="@{/styles/global.css}" />
+    <link rel="stylesheet" th:href="@{/styles/cadastro-cliente.css}" />
+</head>
+<body>
+    <div class="cadastro-cliente-container box">
+        <a class="botao-voltar" href="javascript:history.go(-1)"><img th:src="@{/image/icons/arrow-left.svg}" /><p th:text="#{cadastro.voltar}"><p></a>
+
+        <form class="form-cadastro-cliente" action="cadastroPacote" method="POST" enctype="multipart/form-data">
+            <h1 th:text="addPacote.title"></h1>
+            <div class="campos">
+                <div class="campo-container">
+                    <label for="cidade" th:text="#{pacote.cidade}"></label>
+                    <input class="campo" id="cidade" name="cidade" type="text" />
+                </div>
+                <div class="campo-container">
+                    <label for="estado" th:text="#{pacote.estado}"></label>
+                    <input class="campo" id="estado" name="estado" type="text" />
+                </div>
+                <div class="campo-container">
+                    <label for="pais" th:text="#{pacote.pais}"></label>
+                    <input class="campo" id="pais" name="pais" type="text" />
+                </div>
+                <div class="campo-container">
+                    <label for="data-partida" th:text="#{pacote.dataPartida}"></label>
+                    <input class="campo" id="data-partida" name="data-partida" type="date" />
+                </div>
+                <div class="campo-container">
+                    <label for="valor" th:text="#{pacote.valor}"></label>
+                    <input class="campo" id="valor" name="valor" type="valor" />
+                </div>
+                <div class="campo-container">
+                    <label for="duracao" th:text="#{pacote.duracao}"></label>
+                    <input class="campo" id="duracao" name="duracao-dias" type="number" />
+                </div>
+                <div class="campo-container">
+                    <label for="descricao" th:text="#{pacote.descricao}"></label>
+                    <input type="file" id="descricao" name="descricao" />
+                </div>
+                <div class="campo-container">
+                    <label for="fotos" th:text="#{addPacote.fotos}"></label>
+                    <input type="file" id="fotos" name="fotos" multiple />
+                </div>
+            </div>
+            <input class="submit" type="submit" name="bOK" th:value="#{addPacote.botao}" />
+        </form>
+    </div>
+</body>
+</html>
