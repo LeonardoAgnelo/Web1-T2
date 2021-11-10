@@ -98,6 +98,6 @@ public class PacoteController {
 		
 		file.transferTo(new File(uploadDir, fileName));
 
-    return uploadPath + fileName;
+    return uploadPath + File.separator + fileName;
   }
 }
