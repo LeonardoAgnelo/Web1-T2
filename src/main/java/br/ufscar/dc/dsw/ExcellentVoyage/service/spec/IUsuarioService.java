@@ -5,5 +5,5 @@ import br.ufscar.dc.dsw.ExcellentVoyage.domain.Usuario;
 
 public interface IUsuarioService {
     
-    public Usuario BuscarPorEmail(String email);
+    public Usuario buscarPorEmail(String email);
 }
