@@ -22,6 +22,10 @@ public class Foto {
     @Column(nullable = false)
     private String url;
 
+    public Foto(String url) {
+        this.url = url;
+    }
+
     public Long getId() {
         return this.id;
     }

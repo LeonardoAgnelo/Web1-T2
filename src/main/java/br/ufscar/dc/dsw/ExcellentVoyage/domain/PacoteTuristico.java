@@ -13,44 +13,54 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 @Entity
 @Table(name = "PacoteTuristico")
 public class PacoteTuristico {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "cnpjAgencia")
-    private Agencia agencia;
+	@ManyToOne
+	@JoinColumn(name = "cnpjAgencia")
+	private Agencia agencia;
 
-    @Column(nullable = false, length = 60)
-    private String destinoCidade;
+	@NotBlank(message = "{NotBlank.pacote.cidade}")
+	@Column(nullable = false, length = 60)
+	private String destinoCidade;
 
-    @Column(nullable = false, length = 60)
-    private String destinoEstado;
+	@NotBlank(message = "{NotBlank.pacote.estado}")
+	@Column(nullable = false, length = 60)
+	private String destinoEstado;
 
-    @Column(nullable = false, length = 60)
-    private String destinoPais;
+	@NotBlank(message = "{NotBlank.pacote.pais}")
+	@Column(nullable = false, length = 60)
+	private String destinoPais;
 
-    @Column(nullable = false)
-    private Date dataPartida;
+	@NotNull(message = "{NotBlank.pacote.partida}")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(nullable = false)
+	private Date dataPartida;
 
-    @Column(nullable = false)
-    private Integer duracaoDias;
+	@NotNull(message = "{NotBlank.pacote.duracao}")
+	@Column(nullable = false)
+	private Integer duracaoDias;
 
-    @NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
+	@NotNull(message = "{NotBlank.pacote.valor}")
+	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.0")
-    private BigDecimal valor;
+	private BigDecimal valor;
 
-    @Column(nullable = false)
-    private String descricao;
+	@Column(nullable = false)
+	private String descricao;
 
-    @Column(nullable = false)
-    private Integer qtdFoto;
+	@Column(nullable = false)
+	private Integer qtdFoto;
 
 	@OneToMany(mappedBy = "pacoteTuristico")
 	private List<Foto> fotos;
@@ -133,5 +143,13 @@ public class PacoteTuristico {
 
 	public Integer getQtdFoto () {
 		return this.qtdFoto;
+	}
+
+	public void setFotos (List<Foto> fotos) {
+		this.fotos = fotos;
+	}
+
+	public List<Foto> getFotos () {
+		return this.fotos;
 	}
 }
