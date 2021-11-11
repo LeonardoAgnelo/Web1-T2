@@ -8,7 +8,6 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -97,17 +96,17 @@ public class PacoteController {
   }
 
   private String addFile(MultipartFile file) throws IOException {
-    String fileName = file.getOriginalFilename().split("\\.")[0] + "-" + UUID.randomUUID().toString() + "." + file.getOriginalFilename().split("\\.")[1] ;
+    String fileName = file.getOriginalFilename().split("\\.")[0] + "-" + UUID.randomUUID().toString() + "." + file.getOriginalFilename().split("\\.")[1];
 
     String uploadPath = context.getRealPath("") + File.separator + "upload";
 		File uploadDir = new File(uploadPath);
-		
+
 		if (!uploadDir.exists()) {
 			uploadDir.mkdir();
 		}
-		
+
 		file.transferTo(new File(uploadDir, fileName));
 
-    return uploadPath + File.separator + fileName;
+    return File.separator + "upload" + File.separator + fileName;
   }
 }
