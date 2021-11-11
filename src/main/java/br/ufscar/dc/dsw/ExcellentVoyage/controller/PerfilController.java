@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.ufscar.dc.dsw.ExcellentVoyage.domain.Agencia;
 import br.ufscar.dc.dsw.ExcellentVoyage.domain.PacoteTuristico;
+import br.ufscar.dc.dsw.ExcellentVoyage.domain.Cliente;
 import br.ufscar.dc.dsw.ExcellentVoyage.service.spec.IPacoteService;
-import br.ufscar.dc.dsw.ExcellentVoyage.service.spec.IUsuarioService;
+import br.ufscar.dc.dsw.ExcellentVoyage.service.spec.*;
 
 @Controller
 @RequestMapping("/perfil")
@@ -23,6 +24,10 @@ public class PerfilController {
 
   @Autowired
   IUsuarioService usuarioService;
+  @Autowired
+  IClienteService clienteService;
+  @Autowired
+  IAgenciaService agenciaService;
   
   @GetMapping("")
   public String onLoad(Authentication auth, Model model) {
@@ -34,6 +39,16 @@ public class PerfilController {
             List<PacoteTuristico> listaPacotes = pacoteService.listarPelaAgencia(agencia);
             System.out.println(listaPacotes.size());
             model.addAttribute("listaPacotes", listaPacotes);
+          break;
+
+        case "ROLE_cliente":
+          break;
+        
+        case "ROLE_admin":
+            List<Agencia> listaAgencia = agenciaService.buscarTodos();
+            List<Cliente> listaCliente = clienteService.buscarTodos();
+            model.addAttribute("listaAgencia", listaAgencia);
+            model.addAttribute("listaCliente", listaCliente);
           break;
       
         default:
