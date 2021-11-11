@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import br.ufscar.dc.dsw.ExcellentVoyage.validation.UniqueEmail;
+
 @Entity
 @Table(name = "Usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -27,6 +29,7 @@ public class Usuario implements Serializable {
     @Column(name = "nome", nullable = false, length = 60)
     private String nome;
 
+    @UniqueEmail(message = "{unique.user.email}")
     @NotBlank(message = "{NotBlank.user.email}")
     @Size(max = 60)
     @Column(name = "email", nullable = false, unique = true, length = 60)
