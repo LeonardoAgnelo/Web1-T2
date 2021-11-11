@@ -38,6 +38,10 @@ public class PacoteService implements IPacoteService {
     }
   }
 
+  public PacoteTuristico buscarPeloId(long id) {
+    return pacoteDAO.findById(id);
+  }
+
   public List<PacoteTuristico> listarPelaAgencia(Agencia agencia, Boolean vigente) {
     if (vigente)
       return pacoteDAO.findAllByAgenciaAndDataPartidaGreaterThan(agencia, new Date());

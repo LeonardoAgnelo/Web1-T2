@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +40,13 @@ public class PacoteController {
   @Autowired
 	ServletContext context;
 
+  @GetMapping("/{id}")
+  public String show(@PathVariable("id") long id, Model model) {
+    PacoteTuristico pacote = pacoteService.buscarPeloId(id);
+    model.addAttribute("pacote", pacote);
+    return "pacote";
+  }
+
   @GetMapping("/adicionar")
   public String formsPacote(
     PacoteTuristico pacoteTuristico
@@ -57,6 +66,9 @@ public class PacoteController {
     Boolean hasOtherErros = false;
     if (descricao.isEmpty()) {
       model.addAttribute("descricaoFile", "O campo descrição é obrigatorio.");
+      hasOtherErros = true;
+    } else if (!descricao.getOriginalFilename().split("\\.")[1].equals("pdf")) {
+      model.addAttribute("descricaoFile", "A descrição tem que ser uma arquivo PDF");
       hasOtherErros = true;
     }
 

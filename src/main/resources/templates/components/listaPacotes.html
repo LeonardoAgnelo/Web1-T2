@@ -11,7 +11,7 @@
                 <p th:text="${#dates.format(pacote.dataPartida, 'dd/MM/yyyy')}"></p>
             </div>
             <div class="pacote-ver">
-              <a href="pacote?id=${pacote.id}" th:text="#{listapacote.detalhes}"></a>
+              <a th:href="@{'/pacote/' + ${pacote.id}}" th:text="#{listapacote.detalhes}"></a>
             </div>
             <!-- <c:choose>
                 <c:when test="${param.comprar}">

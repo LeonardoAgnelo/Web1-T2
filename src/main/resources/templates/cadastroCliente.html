@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{/styles/cadastro-cliente.css}" />
 <body>
     <div class="cadastro-cliente-container box">
-        <a class="botao-voltar" href="javascript:history.go(-1)"><img th:src="@{/image/icons/arrow-left.svg}" /><p th:text="#{cadastro.voltar}"><p></a>
+        <a class="botao-voltar" th:href="@{/cadastro}"><img th:src="@{/image/icons/arrow-left.svg}" /><p th:text="#{cadastro.voltar}"><p></a>
         <!-- apresentava mensagem de erro no escopo
             <div th:if="${result != null} ? ${result.hasErrors()} : false">
             <div class="form-erro">
