@@ -1,5 +1,8 @@
 package br.ufscar.dc.dsw.ExcellentVoyage.service.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +38,14 @@ public class PacoteService implements IPacoteService {
     }
   }
 
-  public List<PacoteTuristico> listarPelaAgencia(Agencia agencia) {
+  public PacoteTuristico buscarPeloId(long id) {
+    return pacoteDAO.findById(id);
+  }
+
+  public List<PacoteTuristico> listarPelaAgencia(Agencia agencia, Boolean vigente) {
+    if (vigente)
+      return pacoteDAO.findAllByAgenciaAndDataPartidaGreaterThan(agencia, new Date());
+
     return pacoteDAO.findAllByAgencia(agencia);
   }
 }

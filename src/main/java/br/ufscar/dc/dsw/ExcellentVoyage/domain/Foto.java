@@ -22,6 +22,9 @@ public class Foto {
     @Column(nullable = false)
     private String url;
 
+    public Foto() {
+    }
+
     public Foto(String url) {
         this.url = url;
     }

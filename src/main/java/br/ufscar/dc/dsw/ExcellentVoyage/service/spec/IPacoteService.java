@@ -8,5 +8,7 @@ import br.ufscar.dc.dsw.ExcellentVoyage.domain.PacoteTuristico;
 public interface IPacoteService {
   void salvar(PacoteTuristico pacoteTuristico);
 
-  List<PacoteTuristico> listarPelaAgencia(Agencia agencia);
+  PacoteTuristico buscarPeloId(long id);
+
+  List<PacoteTuristico> listarPelaAgencia(Agencia agencia, Boolean vigente);
 }

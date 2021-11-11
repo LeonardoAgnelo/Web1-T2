@@ -10,7 +10,16 @@
         </div>
         <a th:href="@{/pacote/adicionar}" type="submit" class="botao-adicionarpacote" th:text="#{agencia.addPacote}"></a>
     </div>
-    <p th:text="${role}"></p>
+
+    <div th:if="${(param.vigente != null) and (param.vigente[0] == 'true')}">
+        <a type="submit" class="botao-pacotesvigentes" href="?" th:text="#{agencia.pacotes}"></a>
+    </div>
+
+    <div th:if="${(param.vigente == null) or (param.vigente[0] != 'true')}">
+        <a type="submit" class="botao-pacotesvigentes" href="?vigente=true" th:text="#{agencia.pacotesVigentes}"></a>
+    </div>
+
+    <div th:insert="components/listaPacotes.html"></div>
     
     <!-- <div class="pacotes-container">
         <c:choose>
