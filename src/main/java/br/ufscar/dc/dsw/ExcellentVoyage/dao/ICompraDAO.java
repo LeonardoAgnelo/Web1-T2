@@ -1,5 +1,7 @@
 package br.ufscar.dc.dsw.ExcellentVoyage.dao;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import br.ufscar.dc.dsw.ExcellentVoyage.domain.Cliente;
@@ -12,4 +14,6 @@ public interface ICompraDAO extends CrudRepository<Compra, Long>{
 	Compra save(Compra compra);
 
     Compra findByClienteAndPacoteTuristico(Cliente cliente, PacoteTuristico pacoteTuristico );
+
+    List<Compra> findByCliente(Cliente cliente);
 }

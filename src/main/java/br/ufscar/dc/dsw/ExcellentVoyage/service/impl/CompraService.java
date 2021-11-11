@@ -1,5 +1,7 @@
 package br.ufscar.dc.dsw.ExcellentVoyage.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +23,10 @@ public class CompraService implements ICompraService {
   }
 
   public Compra buscarPeloClienteEPeloPacoteTuristico (Cliente cliente, PacoteTuristico pacoteTuristico) {
-    Compra compra = dao.findByClienteAndPacoteTuristico(cliente, pacoteTuristico);
+    return dao.findByClienteAndPacoteTuristico(cliente, pacoteTuristico);
+  }
 
-    return compra;
+  public List<Compra> buscarPeloCliente(Cliente cliente) {
+    return dao.findByCliente(cliente);
   }
 }
