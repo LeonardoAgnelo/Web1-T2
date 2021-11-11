@@ -2,13 +2,16 @@ package br.ufscar.dc.dsw.ExcellentVoyage.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.mail.internet.InternetAddress;
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,10 +26,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.ufscar.dc.dsw.ExcellentVoyage.domain.Agencia;
+import br.ufscar.dc.dsw.ExcellentVoyage.domain.Cliente;
+import br.ufscar.dc.dsw.ExcellentVoyage.domain.Compra;
 import br.ufscar.dc.dsw.ExcellentVoyage.domain.Foto;
 import br.ufscar.dc.dsw.ExcellentVoyage.domain.PacoteTuristico;
+import br.ufscar.dc.dsw.ExcellentVoyage.service.spec.ICompraService;
 import br.ufscar.dc.dsw.ExcellentVoyage.service.spec.IPacoteService;
 import br.ufscar.dc.dsw.ExcellentVoyage.service.spec.IUsuarioService;
+import br.ufscar.dc.dsw.ExcellentVoyage.util.EmailService;
 
 @Controller
 @RequestMapping("/pacote")
@@ -38,11 +45,42 @@ public class PacoteController {
   IUsuarioService usuarioService;
 
   @Autowired
+  ICompraService compraService;
+
+  @Autowired
 	ServletContext context;
 
   @GetMapping("/{id}")
-  public String show(@PathVariable("id") long id, Model model) {
+  public String show(@PathVariable("id") long id, @RequestParam(name = "comprou", required = false) String comprou,  Authentication auth, Model model) throws IOException {
     PacoteTuristico pacote = pacoteService.buscarPeloId(id);
+
+    Cliente cliente = (Cliente) usuarioService.buscarPorEmail(auth.getName());
+
+    Compra jaComprou = compraService.buscarPeloClienteEPeloPacoteTuristico(cliente, pacote);
+
+    model.addAttribute("jacomprou", jaComprou != null);
+
+    if (Boolean.valueOf(comprou) && jaComprou == null) {
+      DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+      Date dataReuniao = new Date();
+      dataReuniao.setTime(dataReuniao.getTime() + 1000 * 60 * 60 * 24 * 7);
+      String dataReuniaoFormatada = dateFormat.format(dataReuniao);
+
+      String linkReuniao = "meet.google.com/" + UUID.randomUUID().toString();
+
+      Compra compra = new Compra();
+      compra.setCliente(cliente);
+      compra.setDataReuniao(dataReuniao);
+      compra.setLinkReuniao(linkReuniao);
+      compra.setPacoteTuristico(pacote);
+
+      compraService.salvar(compra);
+
+      this.enviarEmail(cliente, pacote, dataReuniaoFormatada, linkReuniao);
+
+      return "redirect:/pacote/" + id;
+    }
+
     model.addAttribute("pacote", pacote);
     return "pacote";
   }
@@ -120,5 +158,24 @@ public class PacoteController {
 		file.transferTo(new File(uploadDir, fileName));
 
     return File.separator + "upload" + File.separator + fileName;
+  }
+
+  private void enviarEmail(Cliente cliente, PacoteTuristico pacote, String dataReuniao, String linkReuniao) throws IOException {
+    EmailService service = new EmailService();
+
+    InternetAddress from = new InternetAddress("contatoexcellentvoyage@gmail.com", "Excellent Voyage");
+    InternetAddress toCliente = new InternetAddress(cliente.getEmail(), cliente.getNome());
+    InternetAddress toAgencia = new InternetAddress(pacote.getAgencia().getEmail(), pacote.getAgencia().getNome());
+
+    String subject = "Compra efetuada!";
+
+    String body = "<div>" +
+        "<h1>" + cliente.getNome() + " efetuou uma compra para " + pacote.getDestinoCidade() + "</h1>" +
+        "<p>Uma reunião foi marcada para o dia " + dataReuniao +" as 19h</p>" +
+        "<p>Link da reunião: " + linkReuniao + "</p>" +
+    "</div>";
+
+    service.send(from, toCliente, subject, body);
+    service.send(from, toAgencia, subject, body);
   }
 }

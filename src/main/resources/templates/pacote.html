@@ -37,6 +37,19 @@
                             <p th:text="#{pacote.descricao}"></p>
                             <a th:href="@{${pacote.descricao}}" th:text="#{pacote.descricao}"></a>
                         </div>
+
+                        <div sec:authorize="hasRole('ROLE_cliente')">
+                            <div class="pacote-compra">
+                                <div th:if="${jacomprou}">
+                                    <div class="pacote-compra">
+                                        <span th:text="#{pacote.compraRealizada}"></span>
+                                    </div>
+                                </div>
+                                <div th:if="${!jacomprou}">
+                                    <a type="submit" name="comprar" th:href="@{?comprou=true}" th:text="#{pacote.comprar}"></a>
+                                </div>
+                            </div>
+                        </div>
                         <!-- <c:if test="${sessionScope.usuarioLogado.tipo == 'cliente'}">
                             <c:choose>
                                 <c:when test="${jacomprou}">
