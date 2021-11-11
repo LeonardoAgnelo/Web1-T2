@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,15 +21,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.ufscar.dc.dsw.ExcellentVoyage.domain.Agencia;
 import br.ufscar.dc.dsw.ExcellentVoyage.domain.Foto;
 import br.ufscar.dc.dsw.ExcellentVoyage.domain.PacoteTuristico;
 import br.ufscar.dc.dsw.ExcellentVoyage.service.spec.IPacoteService;
+import br.ufscar.dc.dsw.ExcellentVoyage.service.spec.IUsuarioService;
 
 @Controller
 @RequestMapping("/pacote")
 public class PacoteController {
   @Autowired
-  IPacoteService service;
+  IPacoteService pacoteService;
+
+  @Autowired
+  IUsuarioService usuarioService;
 
   @Autowired
 	ServletContext context;
@@ -46,6 +52,7 @@ public class PacoteController {
     BindingResult result,
     @RequestParam("descricaoFile") MultipartFile descricao,
     @RequestParam("fotosFile") MultipartFile[] fotos,
+    Authentication auth,
     Model model
   ) throws IOException {
     Boolean hasOtherErros = false;
@@ -81,7 +88,10 @@ public class PacoteController {
 
     pacoteTuristico.setQtdFoto(listaFotos.size());
 
-    service.salvar(pacoteTuristico);
+    Agencia agencia = (Agencia) usuarioService.buscarPorEmail(auth.getName());
+    pacoteTuristico.setAgencia(agencia);
+
+    pacoteService.salvar(pacoteTuristico);
 
     return "redirect:/perfil";
   }
@@ -98,6 +108,6 @@ public class PacoteController {
 		
 		file.transferTo(new File(uploadDir, fileName));
 
-    return uploadPath + fileName;
+    return uploadPath + File.separator + fileName;
   }
 }
