@@ -13,6 +13,8 @@ public interface IClienteDAO extends CrudRepository<Cliente, Long> {
     
     List<Cliente> findAll();
 
+    Cliente findByCpf(String CPF);
+
     Cliente save(Cliente cliente);
 
     void deleteById(Long id);

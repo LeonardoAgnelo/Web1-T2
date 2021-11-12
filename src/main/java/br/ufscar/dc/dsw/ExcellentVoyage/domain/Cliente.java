@@ -13,14 +13,17 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import br.ufscar.dc.dsw.ExcellentVoyage.validation.UniqueCPF;
+
 @Entity
 @Table(name = "Cliente")
 @PrimaryKeyJoinColumn(name="idUsuario")
 public class Cliente extends Usuario {
 
+    @UniqueCPF(message = "{unique.cliente.cpf}")
     @NotBlank(message = "{NotBlank.cliente.cpf}")
     @Size(min = 14, max = 14, message = "{Size.cliente.cpf}")
-    @Column(name = "cpf", nullable = false, length = 14)
+    @Column(name = "cpf", nullable = false, unique = true, length = 14)
     private String cpf;
 
     @NotBlank(message = "{NotBlank.cliente.telefone}")
