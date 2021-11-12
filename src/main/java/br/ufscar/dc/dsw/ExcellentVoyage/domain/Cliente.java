@@ -20,13 +20,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Cliente extends Usuario {
 
     @NotBlank(message = "{NotBlank.cliente.cpf}")
-    @Size(min = 14, max = 14, message = "{Size.cliente.cpf}")
-    @Column(name = "cpf", nullable = false, unique = true, length = 14)
+    @Size(min = 11, max = 11, message = "{Size.cliente.cpf}")
+    @Column(name = "cpf", nullable = false, unique = true, length = 11)
     private String cpf;
 
     @NotBlank(message = "{NotBlank.cliente.telefone}")
-    @Size(min = 11, max = 11, message = "{Size.cliente.telefone}")
-    @Column(name = "telefone", nullable = false, length = 11)
+    @Size(min = 10, max = 20, message = "{Size.cliente.telefone}")
+    @Column(name = "telefone", nullable = false, length = 20)
     private String telefone;
 
     @NotBlank(message = "{NotBlank.cliente.sexo}")

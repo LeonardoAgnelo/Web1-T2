@@ -13,8 +13,8 @@ import javax.validation.constraints.Size;
 public class Agencia extends Usuario {
 
     @NotBlank(message = "{NotBlank.agnecia.cnpj}")
-    @Size(min = 18, max = 18, message = "{Size.agencia.cnpj}")
-    @Column(name = "cnpj", nullable = false, length = 18)
+    @Size(min = 14, max = 14, message = "{Size.agencia.cnpj}")
+    @Column(name = "cnpj", nullable = false, unique= true, length = 14)
     private String cnpj;
 
     @NotBlank(message = "{NotBlank.agnecia.descricao}")

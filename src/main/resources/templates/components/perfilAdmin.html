@@ -33,7 +33,7 @@
                     <td th:text="${#calendars.format(Cliente.dataNascimento, 'dd/MM/yyyy')}"></td>
 					<td><a th:href="@{/cliente/editar/{id} (id=${Cliente.id}) }" th:text="#{admin.editar}"></a></td>
 					<td><a th:href="@{/cliente/delete/{id} (id=${Cliente.id}) }"
-						onclick="return confirm('Tem certeza de que deseja excluir este usuário?');" th:text="#{admin.remover}"></a></td>
+						onclick="return confirm('Tem certeza de que deseja excluir este usuário? todas as compras deste usuário serão excluidas');" th:text="#{admin.remover}"></a></td>
 			    </tr>
 		</table>
 	</div>
@@ -57,7 +57,7 @@
 					<td th:text="${Agencia.email}"></td>
                     <td><a th:href="@{/agencia/editar/{id} (id=${Agencia.id}) }" th:text="#{admin.editar}"></a></td>
                     <td><a th:href="@{/agencia/delete/{id} (id=${Agencia.id}) }"
-						onclick="return confirm('Tem certeza de que deseja excluir este usuário?');"  th:text="#{admin.remover}"></a></td>
+						onclick="return confirm('Tem certeza de que deseja excluir este usuário? todas os pacotes turisticos desta agencia serão excluidos');"  th:text="#{admin.remover}"></a></td>
 			    </tr>
 			</c:forEach>
 		</table>
