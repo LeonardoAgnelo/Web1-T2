@@ -30,6 +30,7 @@ import br.ufscar.dc.dsw.ExcellentVoyage.domain.Cliente;
 import br.ufscar.dc.dsw.ExcellentVoyage.domain.Compra;
 import br.ufscar.dc.dsw.ExcellentVoyage.domain.Foto;
 import br.ufscar.dc.dsw.ExcellentVoyage.domain.PacoteTuristico;
+import br.ufscar.dc.dsw.ExcellentVoyage.domain.Usuario;
 import br.ufscar.dc.dsw.ExcellentVoyage.service.spec.ICompraService;
 import br.ufscar.dc.dsw.ExcellentVoyage.service.spec.IPacoteService;
 import br.ufscar.dc.dsw.ExcellentVoyage.service.spec.IUsuarioService;
@@ -54,13 +55,14 @@ public class PacoteController {
   public String show(@PathVariable("id") long id, @RequestParam(name = "comprou", required = false) String comprou,  Authentication auth, Model model) throws IOException {
     PacoteTuristico pacote = pacoteService.buscarPeloId(id);
 
-    Cliente cliente = (Cliente) usuarioService.buscarPorEmail(auth.getName());
+    Usuario usuario = usuarioService.buscarPorEmail(auth.getName());
+    Compra jaComprou = null;
 
-    Compra jaComprou = compraService.buscarPeloClienteEPeloPacoteTuristico(cliente, pacote);
+    if (usuario.getTipo().equals("ROLE_cliente")) {
+      jaComprou = compraService.buscarPeloClienteEPeloPacoteTuristico((Cliente) usuario, pacote);
+    }
 
-    model.addAttribute("jacomprou", jaComprou != null);
-
-    if (Boolean.valueOf(comprou) && jaComprou == null) {
+    if (Boolean.valueOf(comprou) && jaComprou == null && usuario.getTipo().equals("ROLE_cliente")) {
       DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
       Date dataReuniao = new Date();
       dataReuniao.setTime(dataReuniao.getTime() + 1000 * 60 * 60 * 24 * 7);
@@ -69,18 +71,19 @@ public class PacoteController {
       String linkReuniao = "meet.google.com/" + UUID.randomUUID().toString();
 
       Compra compra = new Compra();
-      compra.setCliente(cliente);
+      compra.setCliente((Cliente) usuario);
       compra.setDataReuniao(dataReuniao);
       compra.setLinkReuniao(linkReuniao);
       compra.setPacoteTuristico(pacote);
 
       compraService.salvar(compra);
 
-      this.enviarEmail(cliente, pacote, dataReuniaoFormatada, linkReuniao);
+      this.enviarEmail((Cliente) usuario, pacote, dataReuniaoFormatada, linkReuniao);
 
       return "redirect:/pacote/" + id;
     }
 
+    model.addAttribute("jacomprou", jaComprou != null);
     model.addAttribute("pacote", pacote);
     return "pacote";
   }

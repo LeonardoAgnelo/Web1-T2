@@ -97,9 +97,12 @@
                     </div>
                 </div>
                 <div class="campo-container">
-                    <label for="confirmar-senha" th:text="#{cadastro.confirmaSenha}"></label>
-                    <input class="campo" id="confirmar-senha" name="confirmarSenha" type="password"/>
+                    <label for="confirmarSenha" th:text="#{cadastro.confirmaSenha}"></label>
+                    <input class="campo" id="confirmarSenha" name="confirmarSenha" type="password"/>
                     <!-- precissa implementar erro de confirmar senha-->
+                    <div class="field-erro">
+                        <span th:text="${confiramarSenhaErro}"></span>
+                    </div>
                 </div>
                 <div class="campo-container">
                     <label for="id">ID</label>
