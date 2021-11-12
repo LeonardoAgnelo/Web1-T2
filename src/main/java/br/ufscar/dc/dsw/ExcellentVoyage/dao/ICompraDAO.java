@@ -16,4 +16,8 @@ public interface ICompraDAO extends CrudRepository<Compra, Long>{
     Compra findByClienteAndPacoteTuristico(Cliente cliente, PacoteTuristico pacoteTuristico );
 
     List<Compra> findByCliente(Cliente cliente);
+
+    void deleteAllByCliente(Cliente cliente);
+
+    void deleteAllByPacoteTuristico(PacoteTuristico pacoteTuristico);
 }

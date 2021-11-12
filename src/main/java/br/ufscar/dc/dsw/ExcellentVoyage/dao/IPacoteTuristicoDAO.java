@@ -26,5 +26,7 @@ public interface IPacoteTuristicoDAO extends CrudRepository<PacoteTuristico, Lon
 
 	List<PacoteTuristico> findAllByAgencia_NomeContains(String nomeAgencia);
 
+	void deleteAllByAgencia(Agencia agencia);
+
 	PacoteTuristico save(PacoteTuristico compra);
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.ufscar.dc.dsw.ExcellentVoyage.domain.Agencia;
 import br.ufscar.dc.dsw.ExcellentVoyage.service.spec.IAgenciaService;
@@ -27,8 +28,14 @@ public class AgenciaController {
 	private BCryptPasswordEncoder encoder;
 
     @PostMapping("/salvar")
-    public String salvar(@Valid Agencia agencia, BindingResult result, Model model) {
-        if (result.hasErrors()) {
+    public String salvar(@Valid Agencia agencia, BindingResult result, @RequestParam("confirmarSenha") String confirmarSenha, Model model) {
+        Boolean error = false;
+        if (!agencia.getSenha().equals(confirmarSenha)) {
+            model.addAttribute("confiramarSenhaErro", "As senhas estão diferentes");
+            error = true;
+        }
+
+        if (result.hasErrors() || error) {
             model.addAttribute("result", result);
             return "cadastroAgencia";
         }
@@ -56,8 +63,14 @@ public class AgenciaController {
     }
 
     @PostMapping("/editar")
-    public String editar(@Valid Agencia agencia, BindingResult result, Model model){
-        if (result.hasErrors()) {
+    public String editar(@Valid Agencia agencia, BindingResult result, @RequestParam("confirmarSenha") String confirmarSenha, Model model){
+        Boolean error = false;
+        if (!agencia.getSenha().equals(confirmarSenha)) {
+            model.addAttribute("confiramarSenhaErro", "As senhas estão diferentes");
+            error = true;
+        }
+
+        if (result.hasErrors() || error) {
             model.addAttribute("result", result);
             return "admin/formularioEdicaoAgencia";
         }
