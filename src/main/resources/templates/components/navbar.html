@@ -1,5 +1,5 @@
 <nav class="navbar-container">
-    <a th:href="@{/index}"><img class="logo" th:src="@{/image/logo.svg}" /></a>
+    <a th:href="@{/}"><img class="logo" th:src="@{/image/logo.svg}" /></a>
     <div class="right-side" sec:authorize="isAuthenticated()">
         <a th:href="@{/perfil}" class="botao-logado">
             <img th:src="@{/image/icons/person-circle.svg}"/> <p th:text="${#authorization.getAuthentication().getPrincipal().getUsuario().getNome()}">Bob</p>

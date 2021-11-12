@@ -3,6 +3,7 @@ package br.ufscar.dc.dsw.ExcellentVoyage.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import br.ufscar.dc.dsw.ExcellentVoyage.domain.Agencia;
@@ -19,8 +20,11 @@ public interface IPacoteTuristicoDAO extends CrudRepository<PacoteTuristico, Lon
 
 	List<PacoteTuristico> findAllByAgenciaAndDataPartidaGreaterThan(Agencia agencia, Date currentDate);
 
-    // @Query("SELECT p FROM pacote_turistico p, compra c WHERE p.id = c.id_pacote AND c.id_cliente = :idcliente")
-	// List<PacoteTuristico> findAllByCliente(@Param("idcliente") Long idCliente);
+	List<PacoteTuristico> findAllByDestinoCidadeOrDestinoEstadoOrDestinoPaisContains(String cidade, String estado, String pais);
+
+	List<PacoteTuristico> findAllByDataPartida(Date dataPartida);
+
+	List<PacoteTuristico> findAllByAgencia_NomeContains(String nomeAgencia);
 
 	PacoteTuristico save(PacoteTuristico compra);
 }
