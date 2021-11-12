@@ -1,7 +1,6 @@
 package br.ufscar.dc.dsw.ExcellentVoyage.service.impl;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,5 +46,42 @@ public class PacoteService implements IPacoteService {
       return pacoteDAO.findAllByAgenciaAndDataPartidaGreaterThan(agencia, new Date());
 
     return pacoteDAO.findAllByAgencia(agencia);
+  }
+
+  public List<PacoteTuristico> buscarPorFiltro(String destino, String nomeAgencia, Date dataPartida) {
+    List<PacoteTuristico> listaPacoteTodos = pacoteDAO.findAll();
+
+    if ((destino == null || destino.isEmpty()) && (nomeAgencia == null || nomeAgencia.isEmpty()) && dataPartida == null) {
+      return pacoteDAO.findAll();
+    }
+
+    List<PacoteTuristico> listaPacotePeloDestino = null;
+    List<PacoteTuristico> listaPacotePelaAgencia = null;
+    List<PacoteTuristico> listaPacotePelaDataPartida = null;
+
+    List<PacoteTuristico> listaPacotes = new ArrayList<PacoteTuristico>();
+
+    if (destino != null && !destino.isEmpty()) {
+      listaPacotePeloDestino = pacoteDAO.findAllByDestinoCidadeOrDestinoEstadoOrDestinoPaisContains(destino, destino, destino);
+    }
+
+    if (nomeAgencia != null && !nomeAgencia.isEmpty()) {
+      listaPacotePelaAgencia = pacoteDAO.findAllByAgencia_NomeContains(nomeAgencia);
+    }
+
+    if (dataPartida != null) {
+      listaPacotePelaDataPartida = pacoteDAO.findAllByDataPartida(dataPartida);
+    }
+
+    for (PacoteTuristico pacote : listaPacoteTodos) {
+      if (
+        (listaPacotePeloDestino == null || listaPacotePeloDestino.contains(pacote)) &&
+        (listaPacotePelaAgencia == null || listaPacotePelaAgencia.contains(pacote)) &&
+        (listaPacotePelaDataPartida == null || listaPacotePelaDataPartida.contains(pacote))) {
+        listaPacotes.add(pacote);
+      }
+    }
+
+    return listaPacotes;
   }
 }

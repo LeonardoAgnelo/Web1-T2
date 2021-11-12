@@ -16,12 +16,13 @@
                 <img th:src="@{/image/hero.png}" />
             </div>
             <div class="pacotes-container">
-                <form id="form" class="filtro" action="home" method="POST">
-                    <input type="text" class="campo" name="destino" style="width: 350px;" th:placeholder="#{index.destino}" />
-                    <input type="text" class="campo" name="agencia" style="width: 350px;" th:placeholder="#{index.agencia}"/>
-                    <input type="text" class="campo" name="data-partida" onfocus="(this.type='date')" style="width: 250px;" th:placeholder="#{index.data}"/>
+                <form id="form" class="filtro" th:action="@{/}" method="GET">
+                    <input type="text" class="campo" name="destino" style="width: 350px;" th:placeholder="#{index.destino}" th:value="*{destino}" />
+                    <input type="text" class="campo" name="nomeAgencia" style="width: 350px;" th:placeholder="#{index.agencia}" th:value="*{nomeAgencia}"/>
+                    <input type="text" class="campo" name="dataPartida" onfocus="(this.type='date')" style="width: 250px;" th:placeholder="#{index.data}" th:value="*{dataPartida}"/>
                     <input type="submit" id="submit" class="botao-filtrar" th:value="#{index.filtro}" />
                 </form>
+                <div th:insert="components/listaPacotes.html"></div>
                 <!-- <jsp:include page="components/listaPacotes.jsp">
                     <jsp:param name="comprar" value="true" />
                 </jsp:include> -->
